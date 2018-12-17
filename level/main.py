@@ -26,7 +26,7 @@ while True:
 
         print((x_value, y_value, z_value))
 
-        if x_value >= 9:
+        if x_value >= 8:
             cpx.pixels[2] = (0, 150, 150)
         else:
             cpx.pixels[2] = (0, 0, 0)
@@ -36,7 +36,7 @@ while True:
         else:
             cpx.pixels[3] = (0, 0, 0)
 
-        if x_value >= 7 and y_value <= 3:
+        if x_value >= 7 and y_value <= 4:
             cpx.pixels[1] = (0, 150, 150)
         else:
             cpx.pixels[1] = (0, 0, 0)
@@ -51,7 +51,7 @@ while True:
         else:
             cpx.pixels[8] = (0, 0, 0)
 
-        if x_value <= 1:
+        if x_value <= 2:
             cpx.pixels[7] = (0, 150, 150)
         else:
             cpx.pixels[7] = (0, 0, 0)
