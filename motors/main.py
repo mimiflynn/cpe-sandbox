@@ -1,15 +1,8 @@
-# a mix of
-# https://learn.adafruit.com/annoy-o-matic-sound-prank-device/code-the-annoy-o-matic
-# and
-# https://learn.adafruit.com/adafruit-crickit-creative-robotic-interactive-construction-kit/circuitpython-dc-motors
-
 import time
 import pulseio
 import board
 from adafruit_circuitplayground.express import cpx
 from adafruit_crickit import crickit
-
-print("Dual motor demo!")
 
 # make two variables for the motors to make code shorter to type
 motor_1 = crickit.dc_motor_1
@@ -238,8 +231,6 @@ while True:
     else:
         print("Slide switch set to on!")
         annoy_ringtone(3, 2.0, 3)
-        time.sleep(2)
-
         motor_1.throttle = 1  # full speed forward
         motor_2.throttle = -1 # full speed backward
         # time.sleep(1)
