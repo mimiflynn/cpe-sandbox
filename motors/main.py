@@ -237,6 +237,9 @@ while True:
         continue
     else:
         print("Slide switch set to on!")
+        annoy_ringtone(3, 2.0, 3)
+        time.sleep(2)
+
         motor_1.throttle = 1  # full speed forward
         motor_2.throttle = -1 # full speed backward
         # time.sleep(1)

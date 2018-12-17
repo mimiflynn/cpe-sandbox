@@ -5,11 +5,12 @@
 
 import time
 from adafruit_circuitplayground.express import cpx
+# https://circuitpython.readthedocs.io/projects/simpleio/en/latest/
 import simpleio
 print("Aloha")
 
-cpx.pixels.brightness = 0.2
-current_dial_position = 'X'
+cpx.pixels.auto_write = False
+cpx.pixels.brightness = 0.05
 
 while True:
     if cpx.switch:
@@ -18,22 +19,56 @@ while True:
         continue
     else:
         x, y, z = cpx.acceleration
-        if x < 0 and y > 9:
-            cpx.pixels[4] = (255, 0, 0)
-            cpx.pixels[5] = (255, 0, 0)
+
+        x_value = abs(int(simpleio.map_range(x, -10, 10, 0, 10)))
+        y_value = abs(int(simpleio.map_range(y, -10, 10, 0, 10)))
+        z_value = abs(int(simpleio.map_range(z, -10, 10, 0, 10)))
+
+        print((x_value, y_value, z_value))
+
+        if x_value >= 9:
+            cpx.pixels[2] = (0, 150, 150)
+        else:
+            cpx.pixels[2] = (0, 0, 0)
+
+        if x_value >= 7 and y_value >= 3:
+            cpx.pixels[3] = (0, 150, 150)
+        else:
+            cpx.pixels[3] = (0, 0, 0)
+
+        if x_value >= 7 and y_value <= 3:
+            cpx.pixels[1] = (0, 150, 150)
+        else:
+            cpx.pixels[1] = (0, 0, 0)
+
+        if x_value <= 3 and y_value >= 3:
+            cpx.pixels[6] = (0, 150, 150)
+        else:
+            cpx.pixels[6] = (0, 0, 0)
+
+        if x_value <= 3 and y_value <= 7:
+            cpx.pixels[8] = (0, 150, 150)
+        else:
+            cpx.pixels[8] = (0, 0, 0)
+
+        if x_value <= 1:
+            cpx.pixels[7] = (0, 150, 150)
+        else:
+            cpx.pixels[7] = (0, 0, 0)
+
+        if y_value >= 9:
+            cpx.pixels[4] = (0, 150, 150)
+            cpx.pixels[5] = (0, 150, 150)
+        else:
+            cpx.pixels[4] = (0, 0, 0)
+            cpx.pixels[5] = (0, 0, 0)
+
+        if y_value <= 1:
+            cpx.pixels[0] = (0, 150, 150)
+            cpx.pixels[9] = (0, 150, 150)
+        else:
             cpx.pixels[0] = (0, 0, 0)
             cpx.pixels[9] = (0, 0, 0)
 
-        if x > 9 and y < 0:
-            cpx.pixels[4] = (0, 0, 0)
-            cpx.pixels[5] = (0, 0, 0)
-            cpx.pixels[0] = (255, 0, 0)
-            cpx.pixels[9] = (255, 0, 0)
-
-        if x < 0 and y > -9:
-            cpx.pixels[2] = (0, 0, 0)
-            cpx.pixels[7] = (255, 0, 0)
-
-        if x > -9 and y < 0:
-            cpx.pixels[2] = (255, 0, 0)
-            cpx.pixels[7] = (0, 0, 0)
+    cpx.pixels.show()
+    time.sleep(0.05)
